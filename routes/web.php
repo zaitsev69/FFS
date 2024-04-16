@@ -6,6 +6,10 @@ use App\Http\Controllers\IncidentController;
 
 Route::post('/incident', [IncidentController::class, 'store'])->name('incident.store');
 
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth'])->name('admin.dashboard');
+
 Route::get('/', function () {
     return view('home');
 });

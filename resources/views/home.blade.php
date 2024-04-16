@@ -37,6 +37,7 @@
     </div>
 </form>
 </section>
+<a href="{{ route('login') }}">Espace administrateur</a>
 
 </body>
 </html>
