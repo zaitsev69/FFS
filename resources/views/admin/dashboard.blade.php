@@ -18,18 +18,24 @@
     </thead>
     <tbody>
         @foreach ($incidents as $incident)
-            <tr>
-                <td>{{ $incident->id }}</td>
-                <td>{{ $incident->prenom }}</td>
-                <td>{{ $incident->nom }}</td>
-                <td>{{ $incident->date }}</td>
-                <td>{{ $incident->lieu_dit }}</td>
-                <td>{{ $incident->incident }}</td>
-                <td>{{ $incident->created_at }}</td>
-                <td>{{ $incident->updated_at }}</td>
-                <td>{{ $incident->is_published }}</td>
+        <tr>
+            <td>{{ $incident->id }}</td>
+            <td>{{ $incident->prenom }}</td>
+            <td>{{ $incident->nom }}</td>
+            <td>{{ $incident->date }}</td>
+            <td>{{ $incident->lieu_dit }}</td>
+            <td>{{ $incident->incident }}</td>
+            <td>{{ $incident->created_at }}</td>
+            <td>{{ $incident->updated_at }}</td>
+            <td>{{ $incident->is_published }}</td>
+            <td>
+                <form action="{{ route('admin.togglePublish', ['id' => $incident->id]) }}" method="POST">
+                    @csrf
+                    <button type="submit">{{ $incident->is_published ? 'Annuler la publication' : 'Publier' }}</button>
+                </form>
+
                 <!-- Ajoutez d'autres colonnes au besoin -->
-            </tr>
+        </tr>
         @endforeach
     </tbody>
 </table>

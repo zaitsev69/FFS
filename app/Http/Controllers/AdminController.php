@@ -12,5 +12,16 @@ class AdminController extends Controller
         
         return view('admin.dashboard', ['incidents' => $incidents]);
     }
+
+
+    public function togglePublish($id)
+    {
+        $incident = Incident::find($id);
+        $incident->is_published = !$incident->is_published;
+        $incident->save();
+
+        return redirect()->back();
+    }
+
 }
 

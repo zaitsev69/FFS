@@ -5,10 +5,12 @@ use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::post('/admin/incidents/{id}/togglePublish', [AdminController::class, 'togglePublish'])->name('admin.togglePublish');
+
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
 
 Route::post('/incidents', [IncidentController::class, 'store'])->name( 'incident.store' );
 
