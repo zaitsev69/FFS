@@ -14,4 +14,6 @@
             </div>
         </div>
     </div>
+    <a href="/admin/dashboard" class="btn btn-primary">Espace administrateur</a>
+
 </x-app-layout>

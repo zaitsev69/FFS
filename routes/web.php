@@ -1,14 +1,18 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IncidentController;
 
-Route::post('/incident', [IncidentController::class, 'store'])->name('incident.store');
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth'])->name('admin.dashboard');
+
+Route::post('/incidents', [IncidentController::class, 'store'])->name( 'incident.store' );
+
 
 Route::get('/', function () {
     return view('home');
