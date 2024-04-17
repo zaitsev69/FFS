@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
-
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
 
 Route::post('/incidents', [IncidentController::class, 'store'])->name( 'incident.store' );
@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/dashboard', function () {
+Route::get('dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

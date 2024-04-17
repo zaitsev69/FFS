@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('incidents', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->string('prenom');
-            $table->date('date');
-            $table->string('lieu_dit');
-            $table->text('incident');
-            
+        Schema::table('incidents', function (Blueprint $table) {
+            $table->boolean('is_published')->default(false);
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('incidents');
+        Schema::table('incidents', function (Blueprint $table) {
+            $table->dropColumn('is_published');
+        });
     }
 };
