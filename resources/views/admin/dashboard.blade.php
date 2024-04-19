@@ -32,10 +32,13 @@
                 <form action="{{ route('admin.togglePublish', ['id' => $incident->id]) }}" method="POST">
                     @csrf
                     <button type="submit">{{ $incident->is_published ? 'Annuler la publication' : 'Publier' }}</button>
+                    
                 </form>
 
                 <!-- Ajoutez d'autres colonnes au besoin -->
         </tr>
         @endforeach
     </tbody>
+    <a href="{{ route('home') }}" >Accueil</a>
+
 </table>

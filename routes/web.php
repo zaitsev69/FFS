@@ -14,6 +14,10 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 
 Route::post('/incidents', [IncidentController::class, 'store'])->name( 'incident.store' );
 
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
+
 
 Route::get('/', function () {
     return view('home');
