@@ -6,6 +6,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/admin/incidents/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+
+Route::patch('/admin/incidents/{id}', [AdminController::class, 'update'])->name('admin.update');
+
 
 Route::post('/admin/incidents/{id}/togglePublish', [AdminController::class, 'togglePublish'])->name('admin.togglePublish');
 
