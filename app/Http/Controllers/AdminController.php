@@ -10,7 +10,7 @@ class AdminController extends Controller
     {
         $incidents = Incident::all();
         
-        return view('admin.dashboard', ['incidents' => $incidents]);
+        return view('dashboard', ['incidents' => $incidents]);
     }
 
 
@@ -22,6 +22,8 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+
+    
 
 }
 

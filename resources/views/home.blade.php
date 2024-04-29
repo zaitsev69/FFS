@@ -75,7 +75,7 @@
             ?>
 
         </div>
-        <a href="{{ route('login') }}">Espace administrateur</a>
+        <a href="{{ route('admin.dashboard') }}">Espace administrateur</a>
     </section>
 </body>
 

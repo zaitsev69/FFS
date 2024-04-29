@@ -1,19 +1,56 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Espace Administrateur') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
             </div>
         </div>
     </div>
-    <a href="/admin/dashboard" class="btn btn-primary">Espace administrateur</a>
+    <div>
 
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Date</th>
+            <th>Lieu Dit</th>
+            <th>Incident</th>
+            <th>Créer le</th>
+            <th>Mis à jour le</th>
+            <th>Is Published</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($incidents as $incident)
+        <tr>
+            <td>{{ $incident->id }}</td>
+            <td>{{ $incident->prenom }}</td>
+            <td>{{ $incident->nom }}</td>
+            <td>{{ $incident->date }}</td>
+            <td>{{ $incident->lieu_dit }}</td>
+            <td>{{ $incident->incident }}</td>
+            <td>{{ $incident->created_at }}</td>
+            <td>{{ $incident->updated_at }}</td>
+            <td>{{ $incident->is_published }}</td>
+            <td>
+                <form action="{{ route('admin.togglePublish', ['id' => $incident->id]) }}" method="POST">
+                    @csrf
+                    <button type="submit">{{ $incident->is_published ? 'Annuler la publication' : 'Publier' }}</button>
+                    
+                </form>
+                
+        </tr>
+        @endforeach
+    </tbody>
+    <a href="{{ route('home') }}" >Accueil</a>
+
+</table>    
 </x-app-layout>

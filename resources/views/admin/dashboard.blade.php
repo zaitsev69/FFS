@@ -13,7 +13,6 @@
             <th>Créer le</th>
             <th>Mis à jour le</th>
             <th>Is Published</th>
-            <!-- Ajoutez d'autres colonnes au besoin -->
         </tr>
     </thead>
     <tbody>
@@ -34,8 +33,7 @@
                     <button type="submit">{{ $incident->is_published ? 'Annuler la publication' : 'Publier' }}</button>
                     
                 </form>
-
-                <!-- Ajoutez d'autres colonnes au besoin -->
+                
         </tr>
         @endforeach
     </tbody>
