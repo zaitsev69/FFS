@@ -34,7 +34,7 @@ class AdminController extends Controller
         $incident->lieu_dit = $request->input('lieu_dit');
         $incident->incident = $request->input('incident');
         $incident->save();
-
+       session()->flash('status', 'L"incident a bien été mis à jour');
         return redirect('admin/dashboard');
     }
 

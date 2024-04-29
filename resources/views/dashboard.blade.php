@@ -54,7 +54,11 @@
             </tr>
             @endforeach
         </tbody>
-        
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endif
         <a href="{{ route('home') }}">Accueil</a>
 
     </table>
