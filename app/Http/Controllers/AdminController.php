@@ -8,12 +8,20 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function index()
+    {
+    $incidents = Incident::where('is_published', 1)->get();
+    return view('home', ['incidents' => $incidents]);
+    }
+
+
     public function dashboard()
     {
         $incidents = Incident::all();
 
         return view('dashboard', ['incidents' => $incidents]);
     }
+
 
 
     public function togglePublish($id)

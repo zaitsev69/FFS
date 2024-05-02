@@ -13,5 +13,6 @@ class IncidentController extends Controller
         
         return redirect()->back();
     }
+
 }
 

@@ -14,15 +14,12 @@ Route::patch('/admin/incidents/{id}', [AdminController::class, 'update'])->name(
 Route::post('/admin/incidents/{id}/togglePublish', [AdminController::class, 'togglePublish'])->name('admin.togglePublish');
 
 
-
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
 
 
 Route::post('/incidents', [IncidentController::class, 'store'])->name( 'incident.store' );
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::get('/home', [AdminController::class, 'index'])->name('home');
 
 
 Route::get('/', function () {

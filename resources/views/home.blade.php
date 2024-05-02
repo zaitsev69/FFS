@@ -30,7 +30,7 @@
             </div>
             <div>
                 <label for="lieu_dit">Lieu dit :</label>
-                <input type="varchar" id="lieu_dit" name="lieu_dit"  required>
+                <input type="varchar" id="lieu_dit" name="lieu_dit" required>
             </div>
             <div>
                 <label for="incident">Incident :</label>
@@ -43,37 +43,24 @@
 
 
         <div>
-            <?php
-
-            use App\Models\Incident;
-
-            $incidents = Incident::where('is_published', 1)->get();
-
-            // Début du tableau
-            echo '<table>';
-
-            echo '<tr>';
-            echo '<th>Prénom</th>';
-            echo '<th>Nom</th>';
-            echo '<th>Date</th>';
-            echo '<th>Lieu</th>';
-            echo '<th>Incident</th>';
-
-            echo '</tr>';
-
-            foreach ($incidents as $incident) {
-                echo '<tr>';
-                echo '<td>' . $incident->prenom . '</td>';
-                echo '<td>' . $incident->nom . '</td>';
-                echo '<td>' . $incident->date . '</td>';
-                echo '<td>' . $incident->lieu_dit . '</td>';
-                echo '<td>' . $incident->incident . '</td>';
-                echo '</tr>';
-            }
-            echo '</table>';
-
-            ?>
-
+            <table>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Date</th>
+                    <th>Lieu</th>
+                    <th>Incident</th>
+                </tr>
+                @foreach ($incidents as $incident)
+                <tr>
+                    <td>{{ $incident->prenom }}</td>
+                    <td>{{ $incident->nom }}</td>
+                    <td>{{ $incident->date }}</td>
+                    <td>{{ $incident->lieu_dit }}</td>
+                    <td>{{ $incident->incident }}</td>
+                </tr>
+                @endforeach
+            </table>
         </div>
         <a href="{{ route('admin.dashboard') }}">Espace administrateur</a>
     </section>
