@@ -17,38 +17,17 @@ header {
     margin-bottom: 30px;
 }
 
-table {
-    margin-bottom: 30px;
-}
+
 
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-form {
-    padding: 10px;
-    border-radius: 2px;
-    margin-bottom: 30px;
-    width: 60vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: 15px;
-}
 
-form > div {
-    background-color: grey;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-form > div > input {
-    width: 20%;
-}
-tbody {
-    width: 500px;
-}
+
+
+
 
 label {
     color: white;
@@ -64,18 +43,6 @@ h1 {
     margin: 0;
 }
 
-a {
-    font-size: 20px;
-    background: white;
-    padding: 4px;
-    border-radius: 4px;
-}
 
-table {
-    background-color: rgb(113, 63, 1);
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    
-}
+
 
