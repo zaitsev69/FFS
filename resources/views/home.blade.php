@@ -10,47 +10,18 @@
 </head>
 
 <body>
-    <header>
-        <h1 class="text-gray-500 bg-blue-500"> Retour d'expériences Féderation FFS</h1>
-        <a class=" inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"" href="{{ route('admin.dashboard') }}">Espace administrateur</a>
-        <img src="https://upload.wikimedia.org/wikipedia/fr/8/83/Logo_FFS.jpg" alt="Logo de la FFSA">
-        
+    <header class="bg-black bg-opacity-90 flex justify-between items-center p-6">
+        <h1 class="text-white font-semibold">Rapport d'incident FFS</h1>
+        <div class="flex items-center space-x-4 mr-9">
+            <a class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('admin.dashboard') }}">Espace administrateur</a>
+            <img class="h-32" src="https://i.ibb.co/xFm5wmy/Logo-FFS-removebg-preview.png" alt="Logo-FFS"></a>
+        </div>
     </header>
-    
 
-
-
-
-    <div class="overflow-x-auto opacity-90">
-        <table class="table-auto w-5/6 divide-y divide-gray-200 mx-auto">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Prénom</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Nom</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Date</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Lieu</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Incident</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @foreach ($incidents as $incident)
-                <tr class="{{ $loop->iteration % 2 == 0 ? 'bg-gray-50' : 'bg-white' }}">
-                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->prenom }}</td>
-                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->nom }}</td>
-                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->date }}</td>
-                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->lieu_dit }}</td>
-                    <td class="px-6 py-4 w-80 whitespace-normal text-gray-500">{{ $incident->incident }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    
-    </section>
-
-    <section class="content bg-white opacity-90 p-6 rounded-lg shadow-md max-w-3xl mx-auto">
-        <form action="{{ route('incident.store') }}" method="post" class="space-y-4">
+    <section class="content  w-auto flex items-center justify-center">
+        <form action="{{ route('incident.store') }}" method="post" class="space-y-4 bg-white opacity-90 p-6 rounded-lg shadow-md my-3 ">
             @csrf
+            <h1 class=" font-normal mb-4 text-blue-500"> Formulaire de déclaration d'incident. La déclaration sera ensuite vérifier et publier par un administrateur du site.</h1>
             <div class="flex space-x-4">
                 <div class="flex-1">
                     <label for="nom" class="block text-sm font-medium text-gray-700">Nom :</label>
@@ -78,6 +49,37 @@
             </div>
         </form>
     </section>
+
+
+
+    <div class="overflow-x-auto opacity-90">
+        <table class="table-auto w-3/6 divide-y divide-gray-200 mx-auto">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Prénom</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Nom</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Date</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Lieu</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Incident</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200  w-3/6">
+                @foreach ($incidents as $incident)
+                <tr class="{{ $loop->iteration % 2 == 0 ? 'bg-gray-50' : 'bg-white' }}">
+                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->prenom }}</td>
+                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->nom }}</td>
+                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->date }}</td>
+                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->lieu_dit }}</td>
+                    <td class="px-6 py-4 w-80 whitespace-normal text-gray-500">{{ $incident->incident }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    </section>
+
+
 </body>
 
 </html>
