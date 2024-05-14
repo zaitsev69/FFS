@@ -5,6 +5,9 @@ use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('home');
+});
 
 Route::get('/admin/incidents/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
 
@@ -22,9 +25,6 @@ Route::post('/incidents', [IncidentController::class, 'store'])->name( 'incident
 Route::get('/home', [AdminController::class, 'index'])->name('home');
 
 
-Route::get('/', function () {
-    return view('home');
-});
 
 Route::get('dashboard', function () {
     return view('dashboard');

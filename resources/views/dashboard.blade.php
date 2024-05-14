@@ -1,3 +1,11 @@
+<header class="bg-black bg-opacity-90 flex justify-between items-center p-6">
+        <h1 class="text-white font-bold">Espace Administrateur</h1>
+        <div class="flex items-center space-x-4 mr-9">
+            <a class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('home') }}">Revenir à l'accueil</a>
+            <img class="h-32" src="https://i.ibb.co/xFm5wmy/Logo-FFS-removebg-preview.png" alt="Logo-FFS"></a>
+        </div>
+    </header>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
