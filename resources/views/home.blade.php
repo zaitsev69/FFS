@@ -9,7 +9,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
+<body class="bg-fixed bg-center mx-0 my-0" style="background-image: url(https://i.goopics.net/s83qra.jpg)";>
     <header class="bg-black bg-opacity-90 flex justify-between items-center p-6">
         <h1 class="text-white font-semibold">Rapport d'incident FFS</h1>
         <div class="flex items-center space-x-4 mr-9">
