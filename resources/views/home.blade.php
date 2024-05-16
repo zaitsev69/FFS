@@ -17,7 +17,16 @@
             <img class="h-32" src="https://i.ibb.co/xFm5wmy/Logo-FFS-removebg-preview.png" alt="Logo-FFS"></a>
         </div>
     </header>
-
+    @if (session('status'))
+    <div id="flash" class="alert alert-success text-center bg-white font-medium text-lime-500 text-xl">
+        {{ session('status') }}
+    </div>
+    <script>
+        setTimeout(function() {
+            document.getElementById('flash').style.display = 'none';
+        }, 5000); 
+    </script>
+    @endif
     <section class="content  w-auto flex items-center justify-center">
         <form action="{{ route('incident.store') }}" method="post" class="space-y-4 bg-white opacity-90 p-6 rounded-lg shadow-md my-3 ">
             @csrf

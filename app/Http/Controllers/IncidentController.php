@@ -9,10 +9,15 @@ class IncidentController extends Controller
 {
     public function store(Request $request)
     {
-        $incident = Incident::create($request->all());
-        
-        return redirect()->back();
+        $validatedData = $request->validate([
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'date' => 'required|date',
+            'lieu_dit' => 'required|string|max:255',
+            'incident' => 'required|string'
+        ]);
+        $incident = Incident::create($validatedData);
+        return redirect()->back()->with('status', 'Votre incident a été envoyé avec succès !');
     }
-
 }
 
