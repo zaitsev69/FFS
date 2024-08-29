@@ -17,20 +17,19 @@
         {{ session('status') }}
     </div>
     <script>
-      
         let flash = document.getElementById('flash');
         setTimeout(function() {
-            flash.classList.add('opacity-100'); 
+            flash.classList.add('opacity-100');
         }, 200);
         setTimeout(function() {
-            flash.classList.remove('opacity-100'); 
-            flash.classList.add('translate-x-full');  
+            flash.classList.remove('opacity-100');
+            flash.classList.add('translate-x-full');
             setTimeout(function() {
-                flash.style.display = 'none';  
-            }, 1000); 
-        }, 3000);  
+                flash.style.display = 'none';
+            }, 1000);
+        }, 3000);
     </script>
-@endif
+    @endif
     <div class="py-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -62,7 +61,11 @@
                 <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->lieu_dit }}</td>
                 <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->incident }}</td>
                 <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->created_at }}</td>
-                <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->updated_at }}</td>
+                <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->updated_at }}
+                    @if($incident->updatedBy)
+                    par {{ $incident->updatedBy->name }}
+                    @endif
+                </td>
                 <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->is_published }}</td>
                 <td class="px-6 py-4 whitespace-normal text-gray-500">
                     <form action="{{ route('admin.togglePublish', ['id' => $incident->id]) }}" method="POST">

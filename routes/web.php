@@ -9,6 +9,8 @@ Route::get('/', function () {
     return view('home');
 });
 
+
+
 Route::delete('/admin/incidents/{id}/', [AdminController::class, 'destroy'])->name('admin.destroy');
 
 Route::get('/admin/incidents/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
@@ -22,7 +24,7 @@ Route::post('/admin/incidents/{id}/togglePublish', [AdminController::class, 'tog
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth');
 
 
-Route::post('/incidents', [IncidentController::class, 'store'])->name( 'incident.store' );
+Route::post('/incidents', [IncidentController::class, 'store'])->name('incident.store');
 
 Route::get('/home', [AdminController::class, 'index'])->name('home');
 
@@ -38,4 +40,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
