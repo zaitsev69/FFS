@@ -13,15 +13,24 @@
         </h2>
     </x-slot>
     @if (session('status'))
-    <div id="flash" class="alert alert-success text-center bg-slate-200 font-medium text-black text-xl">
+    <div id="flash" class="fixed top-36 right-4 bg-green-600 text-white text-lg font-semibold rounded-lg shadow-lg px-4 py-2 opacity-0 transition-opacity transform duration-500 ease-in-out z-50">
         {{ session('status') }}
     </div>
     <script>
+      
+        let flash = document.getElementById('flash');
         setTimeout(function() {
-            document.getElementById('flash').style.display = 'none';
-        }, 5000); 
+            flash.classList.add('opacity-100'); 
+        }, 200);
+        setTimeout(function() {
+            flash.classList.remove('opacity-100'); 
+            flash.classList.add('translate-x-full');  
+            setTimeout(function() {
+                flash.style.display = 'none';  
+            }, 1000); 
+        }, 3000);  
     </script>
-    @endif
+@endif
     <div class="py-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -60,7 +69,12 @@
                         @csrf
                         <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ $incident->is_published ? 'Annuler la publication' : 'Publier' }}</button>
                     </form>
-                    <a href="{{ route('admin.edit', $incident->id) }}" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Éditer</a>
+                    <a href="{{ route('admin.edit', $incident->id) }}" class="inline-flex justify-center py-2 px-4 mb-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Éditer</a>
+                    <form action="{{ route('admin.destroy', ['id' => $incident->id]) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Supprimer</button>
+                    </form>
                 </td>
             </tr>
             @endforeach

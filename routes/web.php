@@ -9,6 +9,8 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::delete('/admin/incidents/{id}/', [AdminController::class, 'destroy'])->name('admin.destroy');
+
 Route::get('/admin/incidents/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
 
 Route::patch('/admin/incidents/{id}', [AdminController::class, 'update'])->name('admin.update');

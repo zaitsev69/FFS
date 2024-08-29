@@ -50,4 +50,12 @@ class AdminController extends Controller
         $incident = Incident::find($id);
         return view('admin.edit', ['incident' => $incident]);
     }
+
+    public function destroy($id)
+{
+    $incident = Incident::find($id); 
+    $incident->delete();  
+
+    return redirect()->back()->with('success', 'Incident supprimé avec succès.');
+}
 }

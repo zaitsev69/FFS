@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recensement accident spéléologie</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href=".css/app.css">
     @vite('resources/css/app.css')
 </head>
 
@@ -18,15 +18,26 @@
         </div>
     </header>
     @if (session('status'))
-    <div id="flash" class="alert alert-success text-center bg-white font-medium text-lime-500 text-xl">
+    <div id="flash" class="fixed top-12 right-4 bg-green-600 text-white text-lg font-semibold rounded-lg shadow-lg px-4 py-2 opacity-0 transition-opacity transform duration-500 ease-in-out z-50">
         {{ session('status') }}
     </div>
     <script>
+      
+        let flash = document.getElementById('flash');
         setTimeout(function() {
-            document.getElementById('flash').style.display = 'none';
-        }, 5000); 
+            flash.classList.add('opacity-100'); 
+        }, 200);
+        setTimeout(function() {
+            flash.classList.remove('opacity-100'); 
+            flash.classList.add('translate-x-full');  
+            setTimeout(function() {
+                flash.style.display = 'none';  
+            }, 1000); 
+        }, 3000);  
     </script>
-    @endif
+@endif
+
+
     <section class="content  w-auto flex items-center justify-center">
         <form action="{{ route('incident.store') }}" method="post" class="space-y-4 bg-white opacity-90 p-6 rounded-lg shadow-md my-3 ">
             @csrf
