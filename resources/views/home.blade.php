@@ -9,12 +9,12 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-fixed bg-center mx-0 my-0" style="background-image: url(https://i.goopics.net/s83qra.jpg)";>
+<body class="bg-fixed bg-center mx-0 my-0" style="background-image: url(https://i.goopics.net/s83qra.jpg);">
     <header class="bg-black bg-opacity-90 flex justify-between items-center p-6">
         <h1 class="text-white font-semibold">Rapport d'incident FFS</h1>
         <div class="flex items-center space-x-4 mr-9">
             <a class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('admin.dashboard') }}">Espace administrateur</a>
-            <img class="h-32" src="https://i.ibb.co/xFm5wmy/Logo-FFS-removebg-preview.png" alt="Logo-FFS"></a>
+            <img class="h-32" src="https://i.ibb.co/xFm5wmy/Logo-FFS-removebg-preview.png" alt="Logo-FFS">
         </div>
     </header>
     @if (session('status'))
@@ -22,34 +22,33 @@
         {{ session('status') }}
     </div>
     <script>
-      
         let flash = document.getElementById('flash');
         setTimeout(function() {
-            flash.classList.add('opacity-100'); 
+            flash.classList.add('opacity-100');
         }, 200);
         setTimeout(function() {
-            flash.classList.remove('opacity-100'); 
-            flash.classList.add('translate-x-full');  
+            flash.classList.remove('opacity-100');
+            flash.classList.add('translate-x-full');
             setTimeout(function() {
-                flash.style.display = 'none';  
-            }, 1000); 
-        }, 3000);  
+                flash.style.display = 'none';
+            }, 1000);
+        }, 3000);
     </script>
-@endif
+    @endif
 
 
-    <section class="content  w-auto flex items-center justify-center">
-        <form action="{{ route('incident.store') }}" method="post" class="space-y-4 bg-white opacity-90 p-6 rounded-lg shadow-md my-3 ">
+    <section class="content w-auto flex items-center justify-center">
+        <form action="{{ route('incident.store') }}" method="post" class="space-y-4 bg-white opacity-90 p-6 rounded-lg shadow-md my-3">
             @csrf
-            <h1 class=" font-normal mb-4 text-blue-500"> Formulaire de déclaration d'incident. La déclaration sera ensuite vérifier et publier par un administrateur du site.</h1>
+            <h1 class="font-normal mb-4 text-blue-500">Formulaire de déclaration d'incident. La déclaration sera ensuite vérifiée et publiée par un administrateur du site.</h1>
             <div class="flex space-x-4">
                 <div class="flex-1">
                     <label for="nom" class="block text-sm font-medium text-gray-700">Nom :</label>
-                    <input type="varchar" id="nom" name="nom" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <input type="text" id="nom" name="nom" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 </div>
                 <div class="flex-1">
                     <label for="prenom" class="block text-sm font-medium text-gray-700">Prénom :</label>
-                    <input type="varchar" id="prenom" name="prenom" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <input type="text" id="prenom" name="prenom" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 </div>
                 <div class="flex-1">
                     <label for="date" class="block text-sm font-medium text-gray-700">Date :</label>
@@ -57,7 +56,7 @@
                 </div>
                 <div class="flex-1">
                     <label for="lieu_dit" class="block text-sm font-medium text-gray-700">Lieu dit :</label>
-                    <input type="varchar" id="lieu_dit" name="lieu_dit" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <input type="text" id="lieu_dit" name="lieu_dit" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 </div>
             </div>
             <div>
@@ -70,9 +69,13 @@
         </form>
     </section>
 
+    <!-- Barre de recherche -->
+    <div class="w-3/6 mx-auto mt-6">
+        <input type="text" id="search" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Rechercher des incidents..." onkeyup="filterIncidents()">
+    </div>
 
-
-    <div class="overflow-x-auto opacity-90">
+    <!-- Liste incidents -->
+    <div id="incident-list" class="overflow-x-auto opacity-90 mt-4">
         <table class="table-auto w-3/6 divide-y divide-gray-200 mx-auto">
             <thead class="bg-gray-50">
                 <tr>
@@ -83,23 +86,83 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Incident</th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200  w-3/6">
+            <tbody id="incident-body" class="bg-white divide-y divide-gray-200">
+                <!-- Les incidents seront injectés ici -->
                 @foreach ($incidents as $incident)
                 <tr class="{{ $loop->iteration % 2 == 0 ? 'bg-gray-50' : 'bg-white' }}">
-                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->prenom }}</td>
-                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->nom }}</td>
-                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->date }}</td>
-                    <td class="px-6 py-4 w-16 whitespace-normal text-gray-500">{{ $incident->lieu_dit }}</td>
-                    <td class="px-6 py-4 w-80 whitespace-normal text-gray-500">{{ $incident->incident }}</td>
+                    <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->prenom }}</td>
+                    <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->nom }}</td>
+                    <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->date }}</td>
+                    <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->lieu_dit }}</td>
+                    <td class="px-6 py-4 whitespace-normal text-gray-500">{{ $incident->incident }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 
-    </section>
+
 
 
 </body>
+<script>
+    /* 
+    function filterIncidents() {
+        const searchInput = document.getElementById('search').value.trim();
+
+        fetch(`/incidents?search=${searchInput}`)
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('incident-body');
+                tbody.innerHTML = '';
+
+                data.forEach(incident => {
+                    const row = `
+                        <tr class="${incident.id % 2 === 0 ? 'bg-gray-50' : 'bg-white'}">
+                            <td class="px-6 py-4 whitespace-normal text-gray-500">${incident.prenom}</td>
+                            <td class="px-6 py-4 whitespace-normal text-gray-500">${incident.nom}</td>
+                            <td class="px-6 py-4 whitespace-normal text-gray-500">${incident.date}</td>
+                            <td class="px-6 py-4 whitespace-normal text-gray-500">${incident.lieu_dit}</td>
+                            <td class="px-6 py-4 whitespace-normal text-gray-500">${incident.incident}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
+    */
+    function filterIncidents() {
+    const searchInput = document.getElementById('search').value.trim();
+
+    fetch(`/incidents?search=${searchInput}`, {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la récupération des incidents');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const tbody = document.getElementById('incident-body');
+        tbody.innerHTML = data.length === 0 
+            ? `<tr><td colspan="5" class="text-center py-4">Aucun incident trouvé.</td></tr>` 
+            : data.map(incident => `
+                <tr class="${incident.id % 2 === 0 ? 'bg-gray-50' : 'bg-white'}">
+                    <td class="px-6 py-4 whitespace-normal text-gray-500">${incident.prenom}</td>
+                    <td class="px-6 py-4 whitespace-normal text-gray-500">${incident.nom}</td>
+                    <td class="px-6 py-4 whitespace-normal text-gray-500">${incident.date}</td>
+                    <td class="px-6 py-4 whitespace-normal text-gray-500">${incident.lieu_dit}</td>
+                    <td class="px-6 py-4 whitespace-normal text-gray-500">${incident.incident}</td>
+                </tr>
+            `).join('');
+    })
+    .catch(error => console.error('Erreur de récupération des incidents:', error));
+}
+
+</script>
 
 </html>
